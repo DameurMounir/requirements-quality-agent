@@ -28,10 +28,11 @@ flowchart TD
     D --> E["Propose revisions and questions"]
     E --> F{"Human decision"}
     F -->|Approve exact digest| G["Export approved artifact"]
-    F -->|Edit or revise| C
+    F -->|Edit proposal text| I["Validate new proposal digest"]
+    I --> F
+    F -->|Request reanalysis| C
     F -->|Reject| H["Close without approved export"]
 ```
 
 The source pack is read-only throughout both processes. An export is a new
 review artifact; it is never an in-place source modification.
-

@@ -6,6 +6,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from pydantic import BaseModel
+
 from requirements_quality_agent.domain.models import (
     ApprovalSubmission,
     CandidateAnalysis,
@@ -14,7 +16,7 @@ from requirements_quality_agent.domain.models import (
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_ROOT = ROOT / "schemas"
-MODELS = {
+MODELS: dict[str, type[BaseModel]] = {
     "approval-submission.schema.json": ApprovalSubmission,
     "candidate-analysis.schema.json": CandidateAnalysis,
     "review-artifact.schema.json": ReviewArtifact,

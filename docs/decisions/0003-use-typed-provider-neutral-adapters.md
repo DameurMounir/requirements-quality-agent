@@ -20,5 +20,7 @@ OpenAI implementations behind that port.
 
 - Provider-specific features are intentionally not exposed in version 1.
 - A fixture run proves workflow behavior, not model accuracy.
-- Live-model provenance must record exact model and configuration.
-
+- Live-model provenance records the adapter, exact model identifier, reasoning
+  effort, prompt digest, and configuration digest. That digest includes the
+  timeout, retry count, output-token cap, response-storage flag, and tool flag;
+  the human-readable constants remain explicit in adapter source.

@@ -9,11 +9,12 @@ integrity, traceability, and approval decision remains outside the model.
 flowchart TD
     A["Synthetic evidence"] --> B["Manifest and input controls"]
     B --> C["Requirement extraction"]
-    C --> D["Model or fixture analysis"]
+    C --> D["Model, rule, or fixture analysis"]
     D --> E["Citation and schema verification"]
     E --> F{"Human review"}
     F -->|Approve exact digest| G["Deterministic JSON and Markdown export"]
-    F -->|Edit or request revision| D
+    F -->|Edit proposal text| F
+    F -->|Request reanalysis| D
     F -->|Reject| H["Close without approved export"]
 ```
 
@@ -51,4 +52,3 @@ The model adapter receives text and returns a typed candidate analysis. It has:
 
 The first release supports local exports only after approval. It cannot send
 mail, update a ticket, commit code, deploy software, or modify a source file.
-

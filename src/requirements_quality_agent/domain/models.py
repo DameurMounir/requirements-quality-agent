@@ -180,6 +180,7 @@ class QualityScorecard(StrictModel):
 class AnalysisProvenance(StrictModel):
     adapter: str
     model: str | None
+    reasoning_effort: str | None
     prompt_sha256: Sha256
     configuration_sha256: Sha256
 
@@ -196,6 +197,31 @@ class ReviewArtifact(StrictModel):
     clarification_questions: tuple[str, ...]
     scorecard: QualityScorecard
     provenance: AnalysisProvenance
+
+    @model_validator(mode="after")
+    def references_are_consistent(self) -> ReviewArtifact:
+        requirement_ids = [item.requirement_id for item in self.requirements]
+        finding_ids = [item.finding_id for item in self.findings]
+        proposal_ids = [item.proposal_id for item in self.revisions]
+        for label, values in (
+            ("requirement", requirement_ids),
+            ("finding", finding_ids),
+            ("proposal", proposal_ids),
+        ):
+            if len(values) != len(set(values)):
+                raise ValueError(f"{label} IDs must be unique")
+
+        requirement_set = set(requirement_ids)
+        finding_set = set(finding_ids)
+        for finding in self.findings:
+            if not set(finding.requirement_ids) <= requirement_set:
+                raise ValueError("finding references an unknown requirement")
+        for proposal in self.revisions:
+            if proposal.requirement_id not in requirement_set:
+                raise ValueError("proposal references an unknown requirement")
+            if not set(proposal.finding_ids) <= finding_set:
+                raise ValueError("proposal references an unknown finding")
+        return self
 
 
 class ApprovalRequest(StrictModel):

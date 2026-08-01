@@ -36,11 +36,23 @@
           "pattern": "^[0-9a-f]{64}$",
           "title": "Prompt Sha256",
           "type": "string"
+        },
+        "reasoning_effort": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reasoning Effort"
         }
       },
       "required": [
         "adapter",
         "model",
+        "reasoning_effort",
         "prompt_sha256",
         "configuration_sha256"
       ],
