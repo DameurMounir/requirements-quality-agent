@@ -64,6 +64,7 @@ def test_exporter_rejects_non_approval_and_stale_artifact_digest(
         ("wrong_file_set", "file set"),
         ("missing_file", "unsafe or missing"),
         ("changed_file", "digest changed"),
+        ("report_symlink", "unsafe or missing"),
         ("manifest_symlink", "manifest is unsafe"),
     ],
 )
@@ -97,6 +98,12 @@ def test_existing_export_tampering_fails_closed(
         (run_dir / "report.json").unlink()
     elif mutation == "changed_file":
         (run_dir / "report.md").write_text("changed")
+    elif mutation == "report_symlink":
+        report_path = run_dir / "report.md"
+        outside = tmp_path / "outside-report.md"
+        outside.write_bytes(report_path.read_bytes())
+        report_path.unlink()
+        report_path.symlink_to(outside)
     else:
         outside = tmp_path / "outside-manifest.json"
         outside.write_bytes(manifest_path.read_bytes())
@@ -133,3 +140,27 @@ def test_preexisting_unsafe_run_output_is_rejected(
             approval=approval,
             output_root=Path("output"),
         )
+
+
+def test_nested_output_component_symlink_is_rejected_before_external_write(
+    repository: Path,
+    tmp_path: Path,
+    service_factory: Callable[..., ReviewService],
+    submission_factory: Callable[..., ApprovalSubmission],
+) -> None:
+    service = service_factory()
+    artifact, approval = _approved_pair(service, "RUN-NESTED-OUTPUT-LINK", submission_factory)
+    outside = tmp_path / "external-output"
+    outside.mkdir()
+    reports = repository / "reports"
+    reports.mkdir()
+    (reports / "linked").symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(ExportRejected, match="output path may not contain a symlink"):
+        LocalReportExporter(repository).export(
+            artifact=artifact,
+            approval=approval,
+            output_root=Path("reports/linked/nested"),
+        )
+
+    assert list(outside.iterdir()) == []

@@ -1,0 +1,415 @@
+{
+  "baseline_kind": "CASE_TUNED_DETERMINISTIC_RULE_BASELINE",
+  "baseline_name": "transparent-rule-baseline",
+  "configuration": {
+    "adapter": "transparent-rule-baseline",
+    "adapter_configuration": {
+      "ruleset": "transparent-rule-baseline/v1"
+    },
+    "answer_key": "case/expected/requirements-labels.jsonl",
+    "comparison": "exact-set-membership",
+    "evaluator_version": "1.0.0",
+    "fixture_excluded": true,
+    "normalization_version": "issue-type-plus-sorted-target-ids/v1",
+    "pair_issue_types": [
+      "CONTRADICTION",
+      "DUPLICATE"
+    ]
+  },
+  "digests": {
+    "adapter_prompt_sha256": "368f4bc0fb3a49afcd9197cfcff16b4d366d5b37d4b50dc32580ae8cc051954c",
+    "answer_key_sha256": "6f82b13b77bb378f587d9fbfbf76ba9a984fc1d2a7832f129036f36bfddb97ec",
+    "configuration_sha256": "c773be60716c53d58085687101d540f89cedae84067a8b4e515bcc5ef980cc03",
+    "evaluator_sha256": "11ce2064cc51d7ad0e9e2bb9278c049f8e10cedf801a74e3fb3cfdac388c00d4",
+    "rule_source_sha256": "2d630fda0e18d859372c70e0d4e1ef2918e93243e7c81bb62483ef66d3df1d3f",
+    "source_manifest_sha256": "5cd6a5c34a0465668105c9c89d473dc0242e5d1fc7b4281a667071b0ce36d317",
+    "source_pack_sha256": "29bcdfed002dc505b519b2ab85f929e86db58fc053a444d9d0eaff565232c6dc"
+  },
+  "finding_metrics": {
+    "false_negative_keys": [],
+    "false_positive_keys": [],
+    "overall": {
+      "expected": 43,
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "predicted": 43,
+      "recall": 1.0,
+      "tp": 43
+    },
+    "per_category": {
+      "AMBIGUOUS_TERM": {
+        "expected": 10,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 10,
+        "recall": 1.0,
+        "tp": 10
+      },
+      "CONTRADICTION": {
+        "expected": 3,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 3,
+        "recall": 1.0,
+        "tp": 3
+      },
+      "DUPLICATE": {
+        "expected": 2,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 2,
+        "recall": 1.0,
+        "tp": 2
+      },
+      "INCOMPLETE": {
+        "expected": 6,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 6,
+        "recall": 1.0,
+        "tp": 6
+      },
+      "MISSING_ACCEPTANCE_CRITERIA": {
+        "expected": 7,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 7,
+        "recall": 1.0,
+        "tp": 7
+      },
+      "NON_ATOMIC": {
+        "expected": 4,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 4,
+        "recall": 1.0,
+        "tp": 4
+      },
+      "UNDEFINED_TERM": {
+        "expected": 3,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 3,
+        "recall": 1.0,
+        "tp": 3
+      },
+      "UNTESTABLE": {
+        "expected": 8,
+        "f1": 1.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 8,
+        "recall": 1.0,
+        "tp": 8
+      }
+    },
+    "true_positive_keys": [
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "BR-002"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "BR-010"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "FR-001"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "FR-004"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "FR-009"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "FR-017"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "NFR-001"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "NFR-005"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "US-001"
+        ]
+      },
+      {
+        "issue_type": "AMBIGUOUS_TERM",
+        "target_ids": [
+          "US-007"
+        ]
+      },
+      {
+        "issue_type": "CONTRADICTION",
+        "target_ids": [
+          "BR-001",
+          "FR-008"
+        ]
+      },
+      {
+        "issue_type": "CONTRADICTION",
+        "target_ids": [
+          "BR-007",
+          "NFR-006"
+        ]
+      },
+      {
+        "issue_type": "CONTRADICTION",
+        "target_ids": [
+          "BR-008",
+          "US-003"
+        ]
+      },
+      {
+        "issue_type": "DUPLICATE",
+        "target_ids": [
+          "FR-006",
+          "FR-016"
+        ]
+      },
+      {
+        "issue_type": "DUPLICATE",
+        "target_ids": [
+          "US-002",
+          "US-008"
+        ]
+      },
+      {
+        "issue_type": "INCOMPLETE",
+        "target_ids": [
+          "BR-004"
+        ]
+      },
+      {
+        "issue_type": "INCOMPLETE",
+        "target_ids": [
+          "FR-002"
+        ]
+      },
+      {
+        "issue_type": "INCOMPLETE",
+        "target_ids": [
+          "FR-010"
+        ]
+      },
+      {
+        "issue_type": "INCOMPLETE",
+        "target_ids": [
+          "FR-019"
+        ]
+      },
+      {
+        "issue_type": "INCOMPLETE",
+        "target_ids": [
+          "NFR-003"
+        ]
+      },
+      {
+        "issue_type": "INCOMPLETE",
+        "target_ids": [
+          "US-006"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-001"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-002"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-005"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-006"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-007"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-008"
+        ]
+      },
+      {
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "target_ids": [
+          "US-010"
+        ]
+      },
+      {
+        "issue_type": "NON_ATOMIC",
+        "target_ids": [
+          "FR-011"
+        ]
+      },
+      {
+        "issue_type": "NON_ATOMIC",
+        "target_ids": [
+          "FR-014"
+        ]
+      },
+      {
+        "issue_type": "NON_ATOMIC",
+        "target_ids": [
+          "NFR-009"
+        ]
+      },
+      {
+        "issue_type": "NON_ATOMIC",
+        "target_ids": [
+          "US-010"
+        ]
+      },
+      {
+        "issue_type": "UNDEFINED_TERM",
+        "target_ids": [
+          "BR-005"
+        ]
+      },
+      {
+        "issue_type": "UNDEFINED_TERM",
+        "target_ids": [
+          "FR-015"
+        ]
+      },
+      {
+        "issue_type": "UNDEFINED_TERM",
+        "target_ids": [
+          "US-010"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "BR-006"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "FR-005"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "FR-013"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "FR-020"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "NFR-004"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "NFR-008"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "NFR-010"
+        ]
+      },
+      {
+        "issue_type": "UNTESTABLE",
+        "target_ids": [
+          "US-005"
+        ]
+      }
+    ]
+  },
+  "fixture_used": false,
+  "is_ai_accuracy": false,
+  "item_classification": {
+    "accuracy": 1.0,
+    "clean_as_clean": 10,
+    "clean_as_flawed": 0,
+    "correct": 50,
+    "flawed_as_clean": 0,
+    "flawed_as_flawed": 40,
+    "gold_clean": 10,
+    "gold_flawed": 40,
+    "predicted_clean": 10,
+    "predicted_flawed": 40,
+    "total_items": 50
+  },
+  "measurement_scope": "Exact performance of a case-tuned deterministic rule baseline on one frozen synthetic case. This is not AI or model accuracy and is not a generalization claim.",
+  "normalization": {
+    "answer_key_normalized_keys": 43,
+    "answer_key_pair_duplicates_removed": 5,
+    "answer_key_raw_labels": 48,
+    "key": "issue_type + sorted unique target IDs",
+    "prediction_duplicates_removed": 0,
+    "prediction_normalized_keys": 43,
+    "prediction_raw_findings": 43
+  },
+  "schema_version": "1.0.0"
+}

@@ -27,3 +27,17 @@ Publication is blocked if any artifact contains:
 Forbidden private identifiers are not repeated in public artifacts. The final
 boundary scan uses a locally supplied denylist so the denylist values
 themselves never need to be committed.
+
+Run the current-tree and reachable-history gates before publication:
+
+```bash
+uv run python scripts/scan_public_boundary.py \
+  --denylist /absolute/path/to/untracked-denylist.txt
+uv run python scripts/scan_public_boundary.py \
+  --history --denylist /absolute/path/to/untracked-denylist.txt
+```
+
+The scanner reports only the file and finding category; it never prints a
+matched denylist value, credential candidate, email, phone number, or public IP.
+Tracked binary images must have an exact path/digest/origin/licence record in
+`assets/provenance.json`. The first release uses no tracked binary asset.

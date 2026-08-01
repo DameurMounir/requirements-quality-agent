@@ -395,9 +395,11 @@ class ReviewService:
             current = WorkflowStatus(state["status"])
             require_transition(current, WorkflowStatus.ANALYZING)
             try:
-                candidate = model.analyze(
-                    documents=state["documents"],
-                    requirements=state["requirements"],
+                candidate = CandidateAnalysis.model_validate(
+                    model.analyze(
+                        documents=state["documents"],
+                        requirements=state["requirements"],
+                    )
                 )
             except Exception:
                 require_transition(WorkflowStatus.ANALYZING, WorkflowStatus.ERROR)

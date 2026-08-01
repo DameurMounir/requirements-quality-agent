@@ -23,6 +23,8 @@ from requirements_quality_agent.domain.models import (
 )
 
 SAFE_ID = re.compile(r"^[A-Z0-9-]{3,100}$")
+SAFE_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+LEDGER_SCHEMA_VERSION = "1.1.0"
 FINAL_STATUSES = {
     WorkflowStatus.REJECTED,
     WorkflowStatus.BLOCKED,
@@ -152,7 +154,7 @@ class LocalRunStore:
 
     def _validate_state(self, state: dict[str, object], run_id: str) -> None:
         try:
-            if state.get("schema_version") != "1.0.0":
+            if state.get("schema_version") != LEDGER_SCHEMA_VERSION:
                 raise ValueError
             status = self._status(state)
             rounds = state["rounds"]
@@ -230,6 +232,15 @@ class LocalRunStore:
                         ApprovalAction.EDIT,
                         ApprovalAction.REQUEST_REVISION,
                     }:
+                        raise ValueError
+                    next_round = rounds[number]
+                    action, decision_digest = self._preceding_decision_link(
+                        next_round,
+                        number + 1,
+                    )
+                    if action is not historical_decision.action or decision_digest != domain_digest(
+                        "approval-record", historical_decision
+                    ):
                         raise ValueError
                 current_decision = decisions_by_round.get(current_round)
             else:
@@ -318,6 +329,7 @@ class LocalRunStore:
     ) -> tuple[ReviewArtifact, ApprovalRequest]:
         if not isinstance(raw, dict):
             raise RunStateError("review round is invalid")
+        self._preceding_decision_link(raw, review_round)
         try:
             if raw["review_round"] != review_round:
                 raise ValueError
@@ -338,12 +350,44 @@ class LocalRunStore:
         return artifact, request
 
     @staticmethod
+    def _preceding_decision_link(
+        raw: object,
+        review_round: int,
+    ) -> tuple[ApprovalAction, str] | tuple[None, None]:
+        if not isinstance(raw, dict):
+            raise RunStateError("review round is invalid")
+        link = raw.get("preceded_by")
+        if review_round == 1:
+            if link is not None:
+                raise RunStateError("initial review round has an invalid predecessor")
+            return None, None
+        if not isinstance(link, dict) or set(link) != {"action", "approval_sha256"}:
+            raise RunStateError("review round predecessor is invalid")
+        try:
+            action = ApprovalAction(link["action"])
+        except (TypeError, ValueError) as exc:
+            raise RunStateError("review round predecessor action is invalid") from exc
+        digest = link["approval_sha256"]
+        if not isinstance(digest, str) or SAFE_SHA256.fullmatch(digest) is None:
+            raise RunStateError("review round predecessor digest is invalid")
+        return action, digest
+
+    @staticmethod
     def _round_payload(
         artifact: ReviewArtifact,
         request: ApprovalRequest,
+        preceding_decision: ApprovalRecord | None = None,
     ) -> dict[str, object]:
         return {
             "review_round": request.review_round,
+            "preceded_by": (
+                None
+                if preceding_decision is None
+                else {
+                    "action": preceding_decision.action.value,
+                    "approval_sha256": domain_digest("approval-record", preceding_decision),
+                }
+            ),
             "artifact": artifact.model_dump(mode="json"),
             "request": request.model_dump(mode="json"),
         }
@@ -379,7 +423,7 @@ class LocalRunStore:
             if self._state_path(run_dir).exists():
                 raise RunStateError("run already exists")
             state: dict[str, object] = {
-                "schema_version": "1.0.0",
+                "schema_version": LEDGER_SCHEMA_VERSION,
                 "run_id": artifact.run_id,
                 "status": WorkflowStatus.NEEDS_REVIEW.value,
                 "current_round": 1,
@@ -410,7 +454,7 @@ class LocalRunStore:
                 state["failure"] = failure.model_dump(mode="json")
             else:
                 state = {
-                    "schema_version": "1.0.0",
+                    "schema_version": LEDGER_SCHEMA_VERSION,
                     "run_id": run_id,
                     "status": status.value,
                     "current_round": None,
@@ -511,8 +555,9 @@ class LocalRunStore:
                 raise RunStateError("edit reused a consumed nonce")
             if artifact.source_pack_sha256 != previous_artifact.source_pack_sha256:
                 raise RunStateError("edit changed the source-pack binding")
+            next_round = self._round_payload(artifact, request, approval)
             self._parse_round(
-                self._round_payload(artifact, request),
+                next_round,
                 approval.run_id,
                 request.review_round,
             )
@@ -520,7 +565,7 @@ class LocalRunStore:
             if not isinstance(rounds, list):
                 raise RunStateError("run rounds are invalid")
             self._append_decision(state, approval)
-            rounds.append(self._round_payload(artifact, request))
+            rounds.append(next_round)
             state["current_round"] = request.review_round
             state["status"] = WorkflowStatus.NEEDS_REVIEW.value
             self._persist_state(self._state_path(run_dir), state, approval.run_id)
@@ -547,15 +592,20 @@ class LocalRunStore:
                 raise RunStateError("revision reused a consumed nonce")
             if artifact.source_pack_sha256 != previous_artifact.source_pack_sha256:
                 raise RunStateError("revision changed the source-pack binding")
+            decisions = state.get("decisions")
+            if not isinstance(decisions, list) or not decisions:
+                raise RunStateError("revision has no preceding decision")
+            previous_decision = ApprovalRecord.model_validate(decisions[-1])
+            next_round = self._round_payload(artifact, request, previous_decision)
             self._parse_round(
-                self._round_payload(artifact, request),
+                next_round,
                 artifact.run_id,
                 request.review_round,
             )
             rounds = state["rounds"]
             if not isinstance(rounds, list):
                 raise RunStateError("run rounds are invalid")
-            rounds.append(self._round_payload(artifact, request))
+            rounds.append(next_round)
             state["current_round"] = request.review_round
             state["status"] = WorkflowStatus.NEEDS_REVIEW.value
             self._persist_state(self._state_path(run_dir), state, artifact.run_id)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import builtins
+import traceback
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock
@@ -138,6 +139,52 @@ def test_openai_adapter_masks_provider_errors(repository: Path) -> None:
     with pytest.raises(OpenAIAdapterError, match="live analysis failed closed") as captured:
         adapter.analyze(documents=pack.documents, requirements=pack.requirements)
     assert "secret raw provider payload" not in str(captured.value)
+
+
+def test_openai_adapter_traceback_omits_provider_detail(repository: Path) -> None:
+    pack = load_case_pack(repository)
+
+    class FailingResponses:
+        def parse(self, **_: object) -> object:
+            raise RuntimeError("secret raw provider traceback payload")
+
+    adapter = OpenAIResponsesAdapter(
+        model="test-model",
+        reasoning_effort="low",
+        client=SimpleNamespace(responses=FailingResponses()),
+    )
+
+    with pytest.raises(OpenAIAdapterError) as captured:
+        adapter.analyze(documents=pack.documents, requirements=pack.requirements)
+    rendered = "".join(
+        traceback.format_exception(
+            type(captured.value),
+            captured.value,
+            captured.value.__traceback__,
+        )
+    )
+    assert "secret raw provider traceback payload" not in rendered
+
+
+def test_openai_adapter_masks_output_accessor_errors(repository: Path) -> None:
+    pack = load_case_pack(repository)
+
+    class RaisingResponse:
+        @property
+        def output_parsed(self) -> object:
+            raise RuntimeError("secret accessor payload")
+
+    responses = Mock()
+    responses.parse.return_value = RaisingResponse()
+    adapter = OpenAIResponsesAdapter(
+        model="test-model",
+        reasoning_effort="low",
+        client=SimpleNamespace(responses=responses),
+    )
+
+    with pytest.raises(OpenAIAdapterError, match="live analysis failed closed") as captured:
+        adapter.analyze(documents=pack.documents, requirements=pack.requirements)
+    assert "secret accessor payload" not in str(captured.value)
 
 
 def test_openai_adapter_reports_missing_optional_dependency(

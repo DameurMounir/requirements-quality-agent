@@ -1,0 +1,30 @@
+{
+  "adapter": "openai-responses",
+  "configuration": {
+    "adapter": "openai-responses",
+    "adapter_configuration": {
+      "max_output_tokens": 16000,
+      "max_retries": 1,
+      "reasoning_effort": "low",
+      "store_response": false,
+      "timeout_seconds": 60.0,
+      "tools_enabled": false
+    },
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "low"
+  },
+  "is_ai_accuracy": false,
+  "measurement_scope": "No live provider call was executed for this release; no model quality, latency, cost, or robustness metric is available.",
+  "metrics": null,
+  "planned_evaluation_digests": {
+    "answer_key_sha256": "6f82b13b77bb378f587d9fbfbf76ba9a984fc1d2a7832f129036f36bfddb97ec",
+    "candidate_schema_sha256": "fa10d90123aac8fa68f116ab83e417725c1aadd010865ccbd323d8825649da1d",
+    "configuration_sha256": "d660baf6bcbb3fe3feebc395ec449183b318e7251a799e2800edf29bafc1758c",
+    "prompt_sha256": "d2ed5885a0d23294009edfc936059266d2807c936d5ae0450fcdcf668b135ec4",
+    "source_manifest_sha256": "5cd6a5c34a0465668105c9c89d473dc0242e5d1fc7b4281a667071b0ce36d317",
+    "source_pack_sha256": "29bcdfed002dc505b519b2ab85f929e86db58fc053a444d9d0eaff565232c6dc"
+  },
+  "reason_code": "NO_LIVE_EXECUTION_RECORDED",
+  "schema_version": "1.0.0",
+  "status": "NOT_RUN"
+}
