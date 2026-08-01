@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "ATLASBRIDGE-ONBOARDING-QUALITY-001",
+  "stakeholders": [
+    {
+      "stakeholder_id": "STK-APPLICANT",
+      "name": "Applicant",
+      "needs": ["Clear instructions", "Visible progress", "Specific error messages", "Predictable decision communication"],
+      "authority": ["Confirm whether proposed applicant-facing wording preserves intent"]
+    },
+    {
+      "stakeholder_id": "STK-ONBOARDING",
+      "name": "Onboarding Specialist",
+      "needs": ["Complete applications", "Actionable validation reasons", "Bounded exception handling"],
+      "authority": ["Confirm operational feasibility", "Clarify routine exception handling"]
+    },
+    {
+      "stakeholder_id": "STK-RISK",
+      "name": "Risk Reviewer",
+      "needs": ["Clear review conditions", "Evidence traceability", "Unambiguous decision authority"],
+      "authority": ["Clarify elevated-risk review rules", "Approve changes to review-decision wording"]
+    },
+    {
+      "stakeholder_id": "STK-SALES",
+      "name": "Sales Manager",
+      "needs": ["Timely activation notice", "No exposure of restricted review data"],
+      "authority": ["Clarify sales-notification needs"]
+    },
+    {
+      "stakeholder_id": "STK-SUPPORT",
+      "name": "Support Analyst",
+      "needs": ["Visible public status", "Clear applicant-facing explanations", "Restricted access to sensitive review data"],
+      "authority": ["Clarify support workflow", "Confirm public status information"]
+    },
+    {
+      "stakeholder_id": "STK-REQUIREMENT-OWNER",
+      "name": "Requirement Owner",
+      "needs": ["Traceable findings", "Explicit conflicts", "Controlled revisions", "Decision history"],
+      "authority": ["Approve, edit, reject, or request revision", "Own the final requirement baseline"]
+    },
+    {
+      "stakeholder_id": "STK-DELIVERY",
+      "name": "Delivery and Test Team",
+      "needs": ["Atomic requirements", "Observable acceptance conditions", "Stable identifiers", "Resolved contradictions"],
+      "authority": ["Challenge testability and implementation clarity", "Raise clarification questions"]
+    }
+  ]
+}
+
