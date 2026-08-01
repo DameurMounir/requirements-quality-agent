@@ -1,4 +1,17 @@
 {
-  "assets": [],
+  "assets": [
+    {
+      "licence": "CC BY 4.0",
+      "origin": "Original browser capture of this repository's local Streamlit demonstration, created 2026-08-01",
+      "path": "assets/interface-demo.png",
+      "sha256": "39424d903e279e23b020a2b7631b2ed3657dcb3dec9276ad7f6a20dcb916c726"
+    },
+    {
+      "licence": "CC BY 4.0",
+      "origin": "Original project social preview rendered from assets/social-preview.svg, created 2026-08-01",
+      "path": "assets/social-preview.png",
+      "sha256": "13fa62afd9fbea1db48be946bec5a0ec1b3098a9935e28e3d60865f67ca2c334"
+    }
+  ],
   "schema_version": "1.0.0"
 }
