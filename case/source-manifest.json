@@ -1,0 +1,53 @@
+{
+  "case_id": "ATLASBRIDGE-ONBOARDING-QUALITY-001",
+  "version": "1.0.0",
+  "created_on": "2026-08-01",
+  "classification": "SYNTHETIC-PUBLIC",
+  "licence": "CC-BY-4.0",
+  "model_input_root": "case/evidence",
+  "expected_root": "case/expected",
+  "sources": [
+    {
+      "source_id": "ABS-BRIEF-001",
+      "version": "1.0",
+      "path": "case/evidence/business-brief.md",
+      "sha256": "595df2afaed78fd739ee4ef717d13f721897da301fcbd03a3e689730741b1c7a",
+      "allowed_for_model": true
+    },
+    {
+      "source_id": "ABS-RULE-001",
+      "version": "1.0",
+      "path": "case/evidence/business-rules.md",
+      "sha256": "b8ce8867175fb23ff2514f0427fff60e09e55031e7f5ccdb2168973a47ab7960",
+      "allowed_for_model": true
+    },
+    {
+      "source_id": "ABS-FR-001",
+      "version": "1.0",
+      "path": "case/evidence/functional-requirements.md",
+      "sha256": "5bebedf75dfba952f44bfb1bb53c72c120e0f22a12e494d676b23d9032ac7926",
+      "allowed_for_model": true
+    },
+    {
+      "source_id": "ABS-NFR-001",
+      "version": "1.0",
+      "path": "case/evidence/non-functional-requirements.md",
+      "sha256": "1f1819146a3e4f0fa07494ef8a00963d8d4e64fa270770bb1919686d76060463",
+      "allowed_for_model": true
+    },
+    {
+      "source_id": "ABS-US-001",
+      "version": "1.0",
+      "path": "case/evidence/user-stories.md",
+      "sha256": "347a6bec3d8393dce445382fd26130861dc0b10cb70e64503b37cd1a334b2c24",
+      "allowed_for_model": true
+    },
+    {
+      "source_id": "ABS-GOLD-001",
+      "version": "1.0",
+      "path": "case/expected/requirements-labels.jsonl",
+      "sha256": "6f82b13b77bb378f587d9fbfbf76ba9a984fc1d2a7832f129036f36bfddb97ec",
+      "allowed_for_model": false
+    }
+  ]
+}
