@@ -110,6 +110,42 @@ def _contradiction(
     )
 
 
+def _mismatched_contradiction(repository: Path, mismatch: str) -> CandidateAnalysis:
+    pack = load_case_pack(repository)
+    by_id = {item.requirement_id: item for item in pack.requirements}
+    left = by_id["FR-008"]
+    right = by_id["BR-001"]
+    if mismatch == "cross_source":
+        left_citation = CandidateCitation(
+            source_id=right.source_span.source_id,
+            exact_quote=left.text,
+        )
+    else:
+        wrong_target = by_id["FR-009"]
+        left_citation = CandidateCitation(
+            source_id=wrong_target.source_span.source_id,
+            exact_quote=wrong_target.text,
+        )
+    return CandidateAnalysis(
+        findings=(
+            CandidateFinding(
+                issue_type=IssueType.CONTRADICTION,
+                severity=Severity.LOW,
+                requirement_ids=(left.requirement_id, right.requirement_id),
+                explanation="The injected adapter attached evidence to the wrong target.",
+                citations=(
+                    left_citation,
+                    CandidateCitation(
+                        source_id=right.source_span.source_id,
+                        exact_quote=right.text,
+                    ),
+                ),
+                origin=AnalysisOrigin.FIXTURE,
+            ),
+        )
+    )
+
+
 def _state(repository: Path, run_id: str) -> dict[str, object]:
     path = repository / "run-state" / run_id / "state.json"
     return json.loads(path.read_text())
@@ -185,3 +221,29 @@ def test_direct_build_blocks_unsupported_contradiction_even_when_model_says_low(
             candidate=candidate,
             model=StaticModel(candidate),
         )
+
+
+@pytest.mark.parametrize(
+    ("mismatch", "run_id"),
+    [
+        ("cross_source", "RUN-CROSS-SOURCE-CITATION"),
+        ("wrong_target", "RUN-WRONG-TARGET-CITATION"),
+    ],
+)
+def test_cross_source_or_wrong_target_citation_blocks_the_integration_run(
+    repository: Path,
+    service_factory: Callable[..., ReviewService],
+    mismatch: str,
+    run_id: str,
+) -> None:
+    candidate = _mismatched_contradiction(repository, mismatch)
+    service = service_factory(model=StaticModel(candidate))
+
+    with pytest.raises(RunFailed, match="evidence verification blocked"):
+        service.analyze(run_id)
+
+    assert service.store.load_status(run_id) is WorkflowStatus.BLOCKED
+    state = _state(repository, run_id)
+    assert state["failure"]["code"] == "EVIDENCE-BLOCKED"
+    assert state["rounds"] == []
+    assert not (repository / "output").exists()

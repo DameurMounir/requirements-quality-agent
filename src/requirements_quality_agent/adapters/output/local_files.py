@@ -29,9 +29,10 @@ def _sha256(path: Path) -> str:
 
 
 def _safe_cell(value: object) -> str:
-    safe = html.escape(str(value), quote=False).replace("\n", " ")
+    normalized = str(value).replace("\r\n", "\n").replace("\r", "\n")
+    safe = html.escape(normalized, quote=False).replace("\n", " ")
     safe = safe.replace("\\", "\\\\")
-    for marker in ("`", "|", "[", "]", "(", ")", "!", "*", "_"):
+    for marker in ("`", "|", "[", "]", "(", ")", "!", "*", "_", "#", "+", "-", ">"):
         safe = safe.replace(marker, f"\\{marker}")
     return safe
 

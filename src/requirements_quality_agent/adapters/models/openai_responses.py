@@ -103,9 +103,9 @@ class OpenAIResponsesAdapter:
                 max_output_tokens=MAX_OUTPUT_TOKENS,
                 store=STORE_RESPONSE,
             )
-        except Exception as exc:
-            raise OpenAIAdapterError("live analysis failed closed") from exc
-        parsed = getattr(response, "output_parsed", None)
+            parsed = getattr(response, "output_parsed", None)
+        except Exception:
+            raise OpenAIAdapterError("live analysis failed closed") from None
         if not isinstance(parsed, CandidateAnalysis):
             raise OpenAIAdapterError("live analysis returned no parsed candidate analysis")
         return CandidateAnalysis(

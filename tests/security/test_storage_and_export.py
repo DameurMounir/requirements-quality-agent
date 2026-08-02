@@ -62,7 +62,10 @@ class MarkdownModel:
                     issue_type=IssueType.AMBIGUOUS_TERM,
                     severity=Severity.LOW,
                     requirement_ids=(target.requirement_id,),
-                    explanation="Unsafe | [link](https://invalid) *bold* _under_ <script>.",
+                    explanation=(
+                        "Unsafe | [link](https://invalid) *bold* _under_ <script>."
+                        "\r\n# injected heading\r`code`"
+                    ),
                     citations=(
                         CandidateCitation(
                             source_id=target.source_span.source_id,
@@ -71,8 +74,11 @@ class MarkdownModel:
                     ),
                     proposed_revision=(
                         "Measure | [this](https://invalid) and do not render <script>."
+                        "\r# proposal heading\r\n`proposal code`"
                     ),
-                    clarification_question="Who owns | [this](https://invalid)?",
+                    clarification_question=(
+                        "Who owns | [this](https://invalid)?\r\n# question heading\r`question code`"
+                    ),
                     origin=AnalysisOrigin.FIXTURE,
                 ),
             )
@@ -188,7 +194,10 @@ def test_markdown_escapes_model_text_and_exposes_control_status_columns(
     submission_factory: Callable[..., ApprovalSubmission],
 ) -> None:
     run_id = "RUN-MARKDOWN-SAFE"
-    service = service_factory(model=MarkdownModel(), reviewer_id="reviewer | [unsafe](x)")
+    service = service_factory(
+        model=MarkdownModel(),
+        reviewer_id="reviewer | [unsafe](x)\r\n# reviewer heading\r`reviewer code`",
+    )
     review = service.analyze(run_id)
     decision = service.decide(
         submission=submission_factory(review.request, ApprovalAction.APPROVE),
@@ -202,6 +211,13 @@ def test_markdown_escapes_model_text_and_exposes_control_status_columns(
     assert "Unsafe \\| \\[link\\]\\(https://invalid\\) \\*bold\\* \\_under\\_" in markdown
     assert "&lt;script&gt;" in markdown
     assert "reviewer \\| \\[unsafe\\]\\(x\\)" in markdown
+    assert "\\# injected heading" in markdown
+    assert "\\# proposal heading" in markdown
+    assert "\\# question heading" in markdown
+    assert "\\# reviewer heading" in markdown
+    assert "\\`code\\`" in markdown
+    assert "\r" not in markdown
+    assert "\n# injected heading" not in markdown
     assert "Unsafe | [link](https://invalid)" not in markdown
     assert "<script>" not in markdown
 

@@ -1,0 +1,112 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_FROZEN: "1"
+  UV_NO_PROGRESS: "1"
+
+jobs:
+  quality:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install pinned uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.11.33"
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Verify and install the locked development environment
+        run: |
+          uv lock --check
+          uv sync --all-extras --group dev
+
+      - name: Lint and formatting
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+
+      - name: Strict typing
+        run: uv run mypy src scripts
+
+      - name: Tests and branch-aware coverage
+        run: >-
+          uv run pytest -q
+          --cov=requirements_quality_agent
+          --cov-branch
+          --cov-report=term-missing
+          --cov-fail-under=90
+
+      - name: Frozen case and analysis contracts
+        run: |
+          uv run python scripts/verify_case.py
+          uv run python scripts/validate_analysis.py
+
+      - name: Generated-artifact drift
+        run: |
+          uv run python scripts/export_schemas.py
+          uv run python scripts/build_fixture.py
+          uv run python scripts/build_openai_result.py
+          uv run python scripts/evaluate_rule_baseline.py
+          git diff --exit-code -- schemas case/fixtures/candidate-analysis.json evaluation/results
+
+      - name: Public-boundary and static-security controls
+        run: |
+          uv run python scripts/scan_public_boundary.py
+          uv run python scripts/scan_public_boundary.py --history
+          uv run bandit -q -r src scripts
+          git ls-files -z | xargs -0 uv run detect-secrets-hook --baseline .secrets.baseline
+
+      - name: Dependency audit
+        run: |
+          uv export --quiet --all-extras --group dev --no-emit-project \
+            --format requirements-txt \
+            --output-file "${RUNNER_TEMP}/audit-${{ matrix.python-version }}.txt"
+          uv run pip-audit --cache-dir "${RUNNER_TEMP}/pip-audit-cache" \
+            --strict --require-hashes \
+            -r "${RUNNER_TEMP}/audit-${{ matrix.python-version }}.txt"
+
+      - name: Build and inspect distributions
+        if: matrix.python-version == '3.12'
+        run: |
+          uv build
+          uv run python scripts/verify_distribution.py
+
+      - name: Install and smoke-test the wheel in a clean environment
+        if: matrix.python-version == '3.12'
+        run: |
+          uv export --quiet --no-dev --no-emit-project --format requirements-txt \
+            --output-file "${RUNNER_TEMP}/runtime-requirements.txt"
+          uv venv "${RUNNER_TEMP}/wheel-smoke" --python "${{ matrix.python-version }}"
+          uv pip install --python "${RUNNER_TEMP}/wheel-smoke/bin/python" \
+            --require-hashes -r "${RUNNER_TEMP}/runtime-requirements.txt"
+          uv pip install --python "${RUNNER_TEMP}/wheel-smoke/bin/python" \
+            --no-deps dist/*.whl
+          "${RUNNER_TEMP}/wheel-smoke/bin/python" -c \
+            "import requirements_quality_agent; print(requirements_quality_agent.__version__)"
+          "${RUNNER_TEMP}/wheel-smoke/bin/requirements-quality-agent" --help

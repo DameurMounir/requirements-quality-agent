@@ -28,6 +28,15 @@ def _inside(path: Path, root: Path) -> bool:
     return True
 
 
+def _has_symlink_component(path: Path, root: Path) -> bool:
+    current = root
+    for part in path.relative_to(root).parts:
+        current /= part
+        if current.is_symlink():
+            return True
+    return False
+
+
 def load_model_documents(
     *, repository_root: Path, manifest: SourceManifest
 ) -> tuple[EvidenceDocument, ...]:
@@ -56,9 +65,12 @@ def load_model_documents(
         if relative.is_absolute() or ".." in relative.parts:
             raise SourcePackRejected(f"unsafe source path: {entry.path}")
         path = repository_root / relative
-        if path.is_symlink():
-            raise SourcePackRejected(f"symlink source is forbidden: {entry.path}")
-        resolved = path.resolve(strict=True)
+        if _has_symlink_component(path, repository_root):
+            raise SourcePackRejected(f"symlink source path is forbidden: {entry.path}")
+        try:
+            resolved = path.resolve(strict=True)
+        except OSError as exc:
+            raise SourcePackRejected(f"source is missing or unreadable: {entry.path}") from exc
         if not _inside(resolved, evidence_root):
             raise SourcePackRejected(f"source is outside model input root: {entry.path}")
         if resolved.suffix.lower() not in ALLOWED_SUFFIXES:

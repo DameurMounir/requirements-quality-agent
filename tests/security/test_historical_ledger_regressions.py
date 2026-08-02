@@ -36,6 +36,8 @@ def _tamper(repository: Path, run_id: str, mutation: str) -> None:
         state["rounds"][0]["artifact"]["scorecard"]["candidate_findings"] += 1
     elif mutation == "historical_decision_digest":
         state["decisions"][0]["artifact_sha256"] = "f" * 64
+    elif mutation == "historical_decision_action":
+        state["decisions"][0]["action"] = "EDIT"
     elif mutation == "schema_version":
         state["schema_version"] = "9.9.9"
     elif mutation == "persisted_status":
@@ -65,6 +67,7 @@ def _assert_both_loaders_reject(service: ReviewService, run_id: str) -> None:
     [
         "historical_artifact",
         "historical_decision_digest",
+        "historical_decision_action",
         "schema_version",
         "persisted_status",
         "historical_artifact_status",

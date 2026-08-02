@@ -2,7 +2,7 @@
 
 | Threat | Preventive control | Verification | Failure state |
 |---|---|---|---|
-| Instruction embedded in a source | Source text is data; model has no tools or policy authority | Adversarial evidence fixture | Unsupported output blocked |
+| Instruction embedded in a source | Source text is JSON user data; model has no tools or policy authority | Adapter request-shape test | Unsupported output blocked |
 | Invented citation | Exact quote must resolve in a manifest source | Missing-quote test | `BLOCKED` or finding rejected |
 | Correct quote attached to wrong source | Source ID and source digest are both checked | Cross-source citation test | `SOURCE_UNKNOWN` or not found |
 | Answer-key leakage | Loader independently freezes the evidence root | Model-input spy test | Initial pack `REJECTED` |

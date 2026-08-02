@@ -55,3 +55,16 @@ def test_repeated_quote_requires_occurrence() -> None:
     assert unresolved.verdict is EvidenceVerdict.QUOTE_AMBIGUOUS
     assert resolved.verdict is EvidenceVerdict.RESOLVED
     assert resolved.char_start == 10
+
+
+def test_out_of_range_occurrence_fails_closed() -> None:
+    result = resolve_citation(
+        CandidateCitation(source_id="SRC-001", exact_quote="same", occurrence=3),
+        (document("same then same"),),
+    )
+
+    assert result.verdict is EvidenceVerdict.QUOTE_NOT_FOUND
+    assert result.source_sha256 is None
+    assert result.char_start is None
+    assert result.char_end is None
+    assert result.quote_sha256 is None

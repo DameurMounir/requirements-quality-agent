@@ -154,10 +154,28 @@ def test_source_symlink_is_rejected(tmp_path: Path) -> None:
     source = evidence / "source.md"
     source.symlink_to(outside)
     digest = hashlib.sha256(outside.read_bytes()).hexdigest()
-    with pytest.raises(SourcePackRejected, match="symlink source"):
+    with pytest.raises(SourcePackRejected, match="symlink source path"):
         load_model_documents(
             repository_root=tmp_path,
             manifest=manifest("case/evidence/source.md", digest),
+        )
+
+
+def test_intermediate_source_symlink_is_rejected_even_within_evidence_root(
+    tmp_path: Path,
+) -> None:
+    evidence = tmp_path / "case" / "evidence"
+    target = evidence / "real-directory"
+    target.mkdir(parents=True)
+    source = target / "source.md"
+    source.write_text("synthetic evidence", encoding="utf-8")
+    (evidence / "linked-directory").symlink_to(target, target_is_directory=True)
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+
+    with pytest.raises(SourcePackRejected, match="symlink source path"):
+        load_model_documents(
+            repository_root=tmp_path,
+            manifest=manifest("case/evidence/linked-directory/source.md", digest),
         )
 
 

@@ -20,8 +20,8 @@ The ledger binds:
 
 Every load revalidates the complete history: schema version, sequential rounds,
 each historical artifact digest, decision-to-request reviewer/round/nonce/action
-binding, the exact used-nonce sequence, status/failure consistency, and final
-export digests.
+binding, each later round's preceding-decision digest, the exact used-nonce
+sequence, status/failure consistency, and final export digests.
 
 Approval and export are separate recoverable operations. Output-path validation
 occurs before approval is committed. If a later filesystem failure prevents
@@ -46,5 +46,10 @@ them.
 - Local `fcntl` locking targets the Linux environment used by this release and
   its CI. Cross-platform or multi-host deployment requires another store.
 - The reviewer ID remains demonstrative, not authenticated.
+- These checks establish internal consistency and catch the tested isolated
+  mutations. The unsigned local JSON file is not adversarial tamper evidence:
+  someone who can rewrite the complete ledger can construct another internally
+  consistent history. A production audit record needs authenticated,
+  append-only or externally anchored storage.
 - Export is idempotent only when the existing report and manifest exactly match
   the approved digests.

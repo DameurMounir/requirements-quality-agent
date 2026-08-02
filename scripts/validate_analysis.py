@@ -4,10 +4,10 @@
 from __future__ import annotations
 
 import json
-import subprocess
-import sys
 from pathlib import Path
 from typing import Any, cast
+
+from verify_case import main as verify_case_main
 
 ROOT = Path(__file__).resolve().parents[1]
 ANALYSIS = ROOT / "case" / "analysis"
@@ -54,20 +54,12 @@ def main() -> int:
     if quality["approval_actions"] != ["APPROVE", "EDIT", "REJECT", "REQUEST_REVISION"]:
         errors.append("approval action contract changed")
 
-    # The executable and script path are application-owned constants, never user input.
-    case_check = subprocess.run(  # noqa: S603
-        [sys.executable, str(ROOT / "scripts" / "verify_case.py")],
-        cwd=ROOT,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
-    if case_check.returncode:
-        errors.append(case_check.stderr.strip() or "case validation failed")
+    if verify_case_main():
+        errors.append("case validation failed")
 
     if errors:
         for error in errors:
-            print(f"FAIL: {error}", file=sys.stderr)
+            print(f"FAIL: {error}")
         return 1
 
     print(
