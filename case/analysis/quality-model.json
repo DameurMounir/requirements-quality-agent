@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "ATLASBRIDGE-ONBOARDING-QUALITY-001",
+  "dimensions": [
+    {"code": "CLEAR", "question": "Can informed readers reach the same material interpretation?"},
+    {"code": "COMPLETE", "question": "Are the necessary actor, trigger, object, condition, and result present?"},
+    {"code": "CONSISTENT", "question": "Can this item coexist with the other accepted items?"},
+    {"code": "ATOMIC", "question": "Does this item express one independently decidable obligation?"},
+    {"code": "TESTABLE", "question": "Can an observable check establish success or failure?"},
+    {"code": "TRACEABLE", "question": "Can the item, finding, proposal, and decision be linked to exact evidence?"}
+  ],
+  "issue_types": [
+    {"code": "AMBIGUOUS_TERM", "default_severity": "HIGH", "required_citations": 1},
+    {"code": "UNTESTABLE", "default_severity": "HIGH", "required_citations": 1},
+    {"code": "INCOMPLETE", "default_severity": "HIGH", "required_citations": 1},
+    {"code": "DUPLICATE", "default_severity": "MEDIUM", "required_citations": 2},
+    {"code": "CONTRADICTION", "default_severity": "CRITICAL", "required_citations": 2},
+    {"code": "NON_ATOMIC", "default_severity": "MEDIUM", "required_citations": 1},
+    {"code": "MISSING_ACCEPTANCE_CRITERIA", "default_severity": "HIGH", "required_citations": 1},
+    {"code": "UNDEFINED_TERM", "default_severity": "HIGH", "required_citations": 1}
+  ],
+  "finding_states": ["CANDIDATE", "VERIFIED", "NEEDS_REVIEW", "CONFIRMED", "REJECTED", "BLOCKED"],
+  "approval_actions": ["APPROVE", "EDIT", "REJECT", "REQUEST_REVISION"]
+}
+

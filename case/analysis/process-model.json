@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "ATLASBRIDGE-ONBOARDING-QUALITY-001",
+  "current_process": [
+    {"step_id": "ASIS-01", "name": "Draft in separate documents", "owner_id": "STK-REQUIREMENT-OWNER", "risk": "Duplicated or inconsistent statements"},
+    {"step_id": "ASIS-02", "name": "Manual consolidation", "owner_id": "STK-REQUIREMENT-OWNER", "risk": "Source and decision provenance can be lost"},
+    {"step_id": "ASIS-03", "name": "Informal peer review", "owner_id": "STK-DELIVERY", "risk": "Quality checks vary by reviewer"},
+    {"step_id": "ASIS-04", "name": "Delivery interpretation", "owner_id": "STK-DELIVERY", "risk": "Ambiguity becomes implementation choice"},
+    {"step_id": "ASIS-05", "name": "Late clarification", "owner_id": "STK-REQUIREMENT-OWNER", "risk": "Rework after design, build, or test begins"}
+  ],
+  "controlled_review": [
+    {"step_id": "REVIEW-01", "name": "Validate source pack", "responsibility": "DETERMINISTIC"},
+    {"step_id": "REVIEW-02", "name": "Extract stable items", "responsibility": "DETERMINISTIC"},
+    {"step_id": "REVIEW-03", "name": "Find candidate issues", "responsibility": "AI_OR_RULE_ADAPTER"},
+    {"step_id": "REVIEW-04", "name": "Resolve exact evidence", "responsibility": "DETERMINISTIC"},
+    {"step_id": "REVIEW-05", "name": "Propose revisions and questions", "responsibility": "AI_OR_RULE_ADAPTER"},
+    {"step_id": "REVIEW-06", "name": "Approve, edit, reject, or request revision", "responsibility": "HUMAN"},
+    {"step_id": "REVIEW-07", "name": "Export approved artifact", "responsibility": "DETERMINISTIC"}
+  ]
+}
+
