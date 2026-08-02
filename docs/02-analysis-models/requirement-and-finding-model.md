@@ -42,8 +42,13 @@ stateDiagram-v2
     CANDIDATE --> VERIFIED: schema and evidence pass
     CANDIDATE --> BLOCKED: mandatory control fails
     VERIFIED --> NEEDS_REVIEW
-    NEEDS_REVIEW --> CONFIRMED: person approves
-    NEEDS_REVIEW --> REJECTED: person rejects
-    NEEDS_REVIEW --> CANDIDATE: edit or request revision
+    NEEDS_REVIEW --> CONFIRMED: possible future per-finding decision
+    NEEDS_REVIEW --> REJECTED: possible future per-finding decision
+    NEEDS_REVIEW --> CANDIDATE: possible future reanalysis
 ```
 
+The first release persists decisions at the complete review-artifact level. It
+does not mutate each finding to `CONFIRMED` or `REJECTED`. Those enum values
+remain reserved for a future per-finding review interface; current findings are
+`VERIFIED` or `BLOCKED`, and the ledger records the human action on their exact
+artifact digest.

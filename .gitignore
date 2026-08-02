@@ -13,8 +13,7 @@ __pycache__/
 build/
 dist/
 htmlcov/
-output/
-run-state/
+/output/
+/run-state/
 *.sqlite
 *.sqlite3
-

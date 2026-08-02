@@ -18,7 +18,7 @@
 - `MEDIUM`: creates avoidable clarification or maintainability work.
 - `LOW`: editorial improvement with limited decision impact.
 
-Severity is not inferred from wording alone. The workflow uses deterministic
-defaults by issue type and allows the reviewer to change a severity with a
-recorded rationale.
-
+Severity is not inferred from wording alone. In the first release, the
+application fixes severity by issue type so a model cannot lower a mandatory
+gate. A reviewer may reject the artifact or explain a disagreement, but there
+is no severity-override interface.

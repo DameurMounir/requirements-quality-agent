@@ -13,7 +13,7 @@ not reliable sources of identity, evidence integrity, permission, or approval.
 
 Use three explicit responsibility lanes:
 
-1. AI or a deterministic fixture interprets meaning and proposes candidates.
+1. AI, transparent rules, or a deterministic fixture propose candidates.
 2. Deterministic code validates sources, schemas, citations, transitions,
    digests, and export rules.
 3. A person approves, edits, rejects, or requests revision for the exact
@@ -25,4 +25,3 @@ Use three explicit responsibility lanes:
 - The agent cannot approve its own proposal.
 - The implementation contains more explicit contracts than a single prompt.
 - Local approval demonstrates integrity binding, not enterprise authentication.
-

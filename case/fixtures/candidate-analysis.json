@@ -1,0 +1,813 @@
+{
+  "candidate_analysis": {
+    "findings": [
+      {
+        "citations": [
+          {
+            "exact_quote": "Suspicious applications must receive extra review.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for BR-002 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'Suspicious'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "BR-002"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "If a document fails validation, escalate the application.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves INCOMPLETE for BR-004 without changing its intended outcome?",
+        "explanation": "The wording matched the published INCOMPLETE baseline rule at 'fails validation, escalate'.",
+        "issue_type": "INCOMPLETE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "BR-004"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "Applicants requiring enhanced diligence shall provide supplementary evidence.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNDEFINED_TERM for BR-005 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNDEFINED_TERM baseline rule at 'enhanced diligence'.",
+        "issue_type": "UNDEFINED_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "BR-005"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "Operations shall perform appropriate checks before returning an application.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for BR-006 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'appropriate checks'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "BR-006"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "Important status changes shall be communicated promptly.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for BR-010 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'Important'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "BR-010"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall verify a new applicant quickly.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for FR-001 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'quickly'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-001"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "Send a confirmation to the customer.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves INCOMPLETE for FR-002 without changing its intended outcome?",
+        "explanation": "The wording matched the published INCOMPLETE baseline rule at 'Send a confirmation'.",
+        "issue_type": "INCOMPLETE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-002"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall make document upload easy for applicants.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for FR-004 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'easy'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": "The portal shall accept PDF, JPEG, and PNG uploads up to 10 MiB and shall show the validation reason when an upload is rejected.",
+        "requirement_ids": [
+          "FR-004"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The application form shall be user-friendly.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for FR-005 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'user-friendly'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-005"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "When an account becomes active, the portal shall email a welcome message to the applicant's registered email address within five minutes.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          },
+          {
+            "exact_quote": "The system shall send the applicant a welcome email no later than five minutes after activation.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "Which evidence-backed statement should resolve the relationship between FR-006 and FR-016?",
+        "explanation": "The published baseline relation identifies FR-006 and FR-016 as a candidate duplicate.",
+        "issue_type": "DUPLICATE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-006",
+          "FR-016"
+        ],
+        "severity": "MEDIUM"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall activate every standard-risk account automatically after document validation.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          },
+          {
+            "exact_quote": "Every new account must receive manual approval from a Risk Reviewer before activation.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "Which evidence-backed statement should resolve the relationship between FR-008 and BR-001?",
+        "explanation": "The published baseline relation identifies FR-008 and BR-001 as a candidate contradiction.",
+        "issue_type": "CONTRADICTION",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-008",
+          "BR-001"
+        ],
+        "severity": "CRITICAL"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall request additional evidence as necessary for premium customers.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for FR-009 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'as necessary'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-009"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall store onboarding data.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves INCOMPLETE for FR-010 without changing its intended outcome?",
+        "explanation": "The wording matched the published INCOMPLETE baseline rule at 'The portal shall store onboarding data'.",
+        "issue_type": "INCOMPLETE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-010"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall validate identity, create the customer profile, and notify the Sales Manager.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves NON_ATOMIC for FR-011 without changing its intended outcome?",
+        "explanation": "The wording matched the published NON_ATOMIC baseline rule at 'validate identity, create'.",
+        "issue_type": "NON_ATOMIC",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-011"
+        ],
+        "severity": "MEDIUM"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The Operations dashboard shall be intuitive.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for FR-013 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'intuitive'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-013"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall upload, crop, compress, and classify each identity document.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves NON_ATOMIC for FR-014 without changing its intended outcome?",
+        "explanation": "The wording matched the published NON_ATOMIC baseline rule at 'upload, crop, compress'.",
+        "issue_type": "NON_ATOMIC",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-014"
+        ],
+        "severity": "MEDIUM"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall accept identity evidence from a trusted source.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNDEFINED_TERM for FR-015 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNDEFINED_TERM baseline rule at 'trusted source'.",
+        "issue_type": "UNDEFINED_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-015"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall give Operations enough information to handle exceptions efficiently.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for FR-017 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'enough'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-017"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall notify the right people when an application changes status.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves INCOMPLETE for FR-019 without changing its intended outcome?",
+        "explanation": "The wording matched the published INCOMPLETE baseline rule at 'right people'.",
+        "issue_type": "INCOMPLETE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-019"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The search function shall return useful results for Operations staff.",
+            "occurrence": null,
+            "source_id": "ABS-FR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for FR-020 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'useful results'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "FR-020"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "Application pages shall load fast.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for NFR-001 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'fast'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-001"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall support all browsers.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves INCOMPLETE for NFR-003 without changing its intended outcome?",
+        "explanation": "The wording matched the published INCOMPLETE baseline rule at 'support all browsers'.",
+        "issue_type": "INCOMPLETE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-003"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "All onboarding data shall be secure.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for NFR-004 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'secure'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-004"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The service shall provide high availability.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for NFR-005 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'high availability'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-005"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall delete application audit events after 30 calendar days.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          },
+          {
+            "exact_quote": "Audit events for an onboarding decision must be retained for seven years from the decision timestamp.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "Which evidence-backed statement should resolve the relationship between NFR-006 and BR-007?",
+        "explanation": "The published baseline relation identifies NFR-006 and BR-007 as a candidate contradiction.",
+        "issue_type": "CONTRADICTION",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-006",
+          "BR-007"
+        ],
+        "severity": "CRITICAL"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The solution shall be scalable.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for NFR-008 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'scalable'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-008"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "The portal shall be available and responsive during peak hours.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves NON_ATOMIC for NFR-009 without changing its intended outcome?",
+        "explanation": "The wording matched the published NON_ATOMIC baseline rule at 'available and responsive'.",
+        "issue_type": "NON_ATOMIC",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-009"
+        ],
+        "severity": "MEDIUM"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "Recovery from a service interruption shall happen within an acceptable time.",
+            "occurrence": null,
+            "source_id": "ABS-NFR-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for NFR-010 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'acceptable time'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "NFR-010"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want a simple verification process so that I can open an account without difficulty. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for US-001 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'simple'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-001"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want a simple verification process so that I can open an account without difficulty. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-001 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-001"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to save and resume my application so that I do not lose my work. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-002 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": "As an applicant, I want to save and resume my application so that I do not lose my work. Acceptance: saving a format-valid draft and reopening it within 30 calendar days restores the last saved values.",
+        "requirement_ids": [
+          "US-002"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to save and resume my application so that I do not lose my work. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          },
+          {
+            "exact_quote": "As an applicant, I want my unfinished form stored and reopened later so that I can continue where I stopped. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "Which evidence-backed statement should resolve the relationship between US-002 and US-008?",
+        "explanation": "The published baseline relation identifies US-002 and US-008 as a candidate duplicate.",
+        "issue_type": "DUPLICATE",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-002",
+          "US-008"
+        ],
+        "severity": "MEDIUM"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want my account activated immediately after I submit my documents so that I can use the service at once. Acceptance: activation occurs without waiting for another person.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          },
+          {
+            "exact_quote": "An elevated-risk account must not be activated until a Risk Reviewer records an APPROVE decision.",
+            "occurrence": null,
+            "source_id": "ABS-RULE-001"
+          }
+        ],
+        "clarification_question": "Which evidence-backed statement should resolve the relationship between US-003 and BR-008?",
+        "explanation": "The published baseline relation identifies US-003 and BR-008 as a candidate contradiction.",
+        "issue_type": "CONTRADICTION",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-003",
+          "BR-008"
+        ],
+        "severity": "CRITICAL"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As a Sales Manager, I want the best notification experience so that I know when a customer is ready. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-005 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": "As a Sales Manager, I want an email within five minutes after account activation so that I know when a customer is ready. Acceptance: the registered Sales Manager receives one activation email within five minutes.",
+        "requirement_ids": [
+          "US-005"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As a Sales Manager, I want the best notification experience so that I know when a customer is ready. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNTESTABLE for US-005 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNTESTABLE baseline rule at 'best notification experience'.",
+        "issue_type": "UNTESTABLE",
+        "origin": "RULE",
+        "proposed_revision": "As a Sales Manager, I want an email within five minutes after account activation so that I know when a customer is ready. Acceptance: the registered Sales Manager receives one activation email within five minutes.",
+        "requirement_ids": [
+          "US-005"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As a Support Analyst, I want account details. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves INCOMPLETE for US-006 without changing its intended outcome?",
+        "explanation": "The wording matched the published INCOMPLETE baseline rule at 'want account details'.",
+        "issue_type": "INCOMPLETE",
+        "origin": "RULE",
+        "proposed_revision": "As a Support Analyst, I want to view non-sensitive application status information so that I can answer applicant questions without viewing internal review data.",
+        "requirement_ids": [
+          "US-006"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As a Support Analyst, I want account details. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-006 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": "As a Support Analyst, I want to view non-sensitive application status information so that I can answer applicant questions without viewing internal review data.",
+        "requirement_ids": [
+          "US-006"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to receive the decision soon so that I can plan my next step. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves AMBIGUOUS_TERM for US-007 without changing its intended outcome?",
+        "explanation": "The wording matched the published AMBIGUOUS_TERM baseline rule at 'soon'.",
+        "issue_type": "AMBIGUOUS_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-007"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to receive the decision soon so that I can plan my next step. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-007 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-007"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want my unfinished form stored and reopened later so that I can continue where I stopped. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-008 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-008"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to update my phone and email and delete my profile so that I control my profile. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves MISSING_ACCEPTANCE_CRITERIA for US-010 without changing its intended outcome?",
+        "explanation": "The wording matched the published MISSING_ACCEPTANCE_CRITERIA baseline rule at 'Acceptance criteria: not supplied.'.",
+        "issue_type": "MISSING_ACCEPTANCE_CRITERIA",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-010"
+        ],
+        "severity": "HIGH"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to update my phone and email and delete my profile so that I control my profile. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves NON_ATOMIC for US-010 without changing its intended outcome?",
+        "explanation": "The wording matched the published NON_ATOMIC baseline rule at 'update my phone and email and delete'.",
+        "issue_type": "NON_ATOMIC",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-010"
+        ],
+        "severity": "MEDIUM"
+      },
+      {
+        "citations": [
+          {
+            "exact_quote": "As an applicant, I want to update my phone and email and delete my profile so that I control my profile. Acceptance criteria: not supplied.",
+            "occurrence": null,
+            "source_id": "ABS-US-001"
+          }
+        ],
+        "clarification_question": "What approved wording or decision resolves UNDEFINED_TERM for US-010 without changing its intended outcome?",
+        "explanation": "The wording matched the published UNDEFINED_TERM baseline rule at 'control my profile'.",
+        "issue_type": "UNDEFINED_TERM",
+        "origin": "RULE",
+        "proposed_revision": null,
+        "requirement_ids": [
+          "US-010"
+        ],
+        "severity": "HIGH"
+      }
+    ]
+  },
+  "fixture_version": "1.0.0",
+  "purpose": "workflow reproduction only; not model-accuracy evidence",
+  "source_pack_sha256": "29bcdfed002dc505b519b2ab85f929e86db58fc053a444d9d0eaff565232c6dc"
+}

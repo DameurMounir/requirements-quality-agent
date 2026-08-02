@@ -20,6 +20,10 @@ from requirements_quality_agent.domain.models import (
 class ReviewState(TypedDict, total=False):
     run_id: str
     status: str
+    review_round: int
+    expected_source_pack_sha256: str
+    manifest_sha256: str
+    source_pack_sha256: str
     manifest: SourceManifest
     documents: tuple[EvidenceDocument, ...]
     requirements: tuple[Requirement, ...]
