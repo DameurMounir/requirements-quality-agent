@@ -1,0 +1,85 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "requirements-quality-agent"
+version = "0.1.0"
+description = "Evidence-linked requirements review with deterministic controls and human approval"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = {file = "LICENSE"}
+authors = [{name = "Mounir Dameur"}]
+keywords = [
+  "ai-agents",
+  "human-in-the-loop",
+  "requirements-analysis",
+  "requirements-engineering",
+  "traceability",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Typing :: Typed",
+]
+dependencies = [
+  "langgraph>=1.0,<2",
+  "pydantic>=2.12,<3",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=2,<3"]
+ui = ["streamlit>=1.45,<2"]
+
+[dependency-groups]
+dev = [
+  "bandit>=1.8,<2",
+  "detect-secrets>=1.5,<2",
+  "mypy>=1.15,<2",
+  "pip-audit>=2.8,<3",
+  "pytest>=8.3,<10",
+  "pytest-cov>=6,<8",
+  "ruff>=0.11,<1",
+]
+
+[project.scripts]
+requirements-quality-agent = "requirements_quality_agent.presentation.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/requirements_quality_agent"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["requirements_quality_agent"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "C4", "E", "F", "I", "S", "SIM", "UP"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "S105", "S106"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unreachable = true
+plugins = ["pydantic.mypy"]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+

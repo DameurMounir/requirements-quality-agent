@@ -8,6 +8,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from typing import cast
 
 ROOT = Path(__file__).resolve().parents[1]
 CASE = ROOT / "case"
@@ -42,7 +43,7 @@ def load_labels() -> dict[str, dict[str, object]]:
     for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
-        row = json.loads(line)
+        row = cast(dict[str, object], json.loads(line))
         item_id = str(row["requirement_id"])
         if item_id in labels:
             raise ValueError(f"duplicate label ID at line {line_number}: {item_id}")
@@ -66,8 +67,8 @@ def main() -> int:
         errors.append(f"expected 40 flawed and 10 clean, found {flawed} and {clean}")
 
     for item_id, row in labels.items():
-        issues = list(row["issues"])
-        related_ids = list(row["related_ids"])
+        issues = cast(list[str], row["issues"])
+        related_ids = cast(list[str], row["related_ids"])
         if bool(row["clean"]) == bool(issues):
             errors.append(f"clean/issue mismatch for {item_id}")
         for related_id in related_ids:
@@ -76,7 +77,10 @@ def main() -> int:
 
     manifest_path = CASE / "source-manifest.json"
     if manifest_path.exists():
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest = cast(
+            dict[str, list[dict[str, str]]],
+            json.loads(manifest_path.read_text(encoding="utf-8")),
+        )
         for entry in manifest["sources"]:
             source_path = ROOT / entry["path"]
             if not source_path.is_file():

@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "ApprovalAction": {
+      "enum": [
+        "APPROVE",
+        "EDIT",
+        "REJECT",
+        "REQUEST_REVISION"
+      ],
+      "title": "ApprovalAction",
+      "type": "string"
+    },
+    "RevisionEdit": {
+      "additionalProperties": false,
+      "properties": {
+        "proposal_id": {
+          "pattern": "^[A-Z][A-Z0-9-]{2,79}$",
+          "title": "Proposal Id",
+          "type": "string"
+        },
+        "replacement_text": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "title": "Replacement Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "proposal_id",
+        "replacement_text"
+      ],
+      "title": "RevisionEdit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/ApprovalAction"
+    },
+    "artifact_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Artifact Sha256",
+      "type": "string"
+    },
+    "comment": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Comment"
+    },
+    "edits": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RevisionEdit"
+      },
+      "title": "Edits",
+      "type": "array"
+    },
+    "nonce": {
+      "maxLength": 128,
+      "minLength": 32,
+      "title": "Nonce",
+      "type": "string"
+    },
+    "review_round": {
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Review Round",
+      "type": "integer"
+    },
+    "reviewer_id": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "run_id": {
+      "pattern": "^[A-Z][A-Z0-9-]{2,79}$",
+      "title": "Run Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "artifact_sha256",
+    "reviewer_id",
+    "review_round",
+    "nonce",
+    "action"
+  ],
+  "title": "ApprovalSubmission",
+  "type": "object"
+}

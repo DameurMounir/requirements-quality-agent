@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "AnalysisOrigin": {
+      "enum": [
+        "FIXTURE",
+        "RULE",
+        "OPENAI"
+      ],
+      "title": "AnalysisOrigin",
+      "type": "string"
+    },
+    "CandidateCitation": {
+      "additionalProperties": false,
+      "properties": {
+        "exact_quote": {
+          "maxLength": 5000,
+          "minLength": 1,
+          "title": "Exact Quote",
+          "type": "string"
+        },
+        "occurrence": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Occurrence"
+        },
+        "source_id": {
+          "pattern": "^[A-Z][A-Z0-9-]{2,79}$",
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "exact_quote"
+      ],
+      "title": "CandidateCitation",
+      "type": "object"
+    },
+    "CandidateFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/CandidateCitation"
+          },
+          "minItems": 1,
+          "title": "Citations",
+          "type": "array"
+        },
+        "clarification_question": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Clarification Question"
+        },
+        "explanation": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "issue_type": {
+          "$ref": "#/$defs/IssueType"
+        },
+        "origin": {
+          "$ref": "#/$defs/AnalysisOrigin"
+        },
+        "proposed_revision": {
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Proposed Revision"
+        },
+        "requirement_ids": {
+          "items": {
+            "pattern": "^[A-Z][A-Z0-9-]{2,79}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Requirement Ids",
+          "type": "array"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        }
+      },
+      "required": [
+        "issue_type",
+        "severity",
+        "requirement_ids",
+        "explanation",
+        "citations",
+        "origin"
+      ],
+      "title": "CandidateFinding",
+      "type": "object"
+    },
+    "IssueType": {
+      "enum": [
+        "AMBIGUOUS_TERM",
+        "UNTESTABLE",
+        "INCOMPLETE",
+        "DUPLICATE",
+        "CONTRADICTION",
+        "NON_ATOMIC",
+        "MISSING_ACCEPTANCE_CRITERIA",
+        "UNDEFINED_TERM"
+      ],
+      "title": "IssueType",
+      "type": "string"
+    },
+    "Severity": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "title": "Severity",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/CandidateFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "findings"
+  ],
+  "title": "CandidateAnalysis",
+  "type": "object"
+}

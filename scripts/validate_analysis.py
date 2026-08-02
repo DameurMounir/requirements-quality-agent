@@ -7,13 +7,17 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any, cast
 
 ROOT = Path(__file__).resolve().parents[1]
 ANALYSIS = ROOT / "case" / "analysis"
 
 
-def load(name: str) -> dict[str, object]:
-    return json.loads((ANALYSIS / name).read_text(encoding="utf-8"))
+def load(name: str) -> dict[str, Any]:
+    return cast(
+        dict[str, Any],
+        json.loads((ANALYSIS / name).read_text(encoding="utf-8")),
+    )
 
 
 def main() -> int:
@@ -43,12 +47,15 @@ def main() -> int:
             expected_codes.update(json.loads(line)["issues"])
     model_codes = {row["code"] for row in quality["issue_types"]}
     if expected_codes != model_codes:
-        errors.append(f"quality codes differ: expected={sorted(expected_codes)} model={sorted(model_codes)}")
+        errors.append(
+            f"quality codes differ: expected={sorted(expected_codes)} model={sorted(model_codes)}"
+        )
 
     if quality["approval_actions"] != ["APPROVE", "EDIT", "REJECT", "REQUEST_REVISION"]:
         errors.append("approval action contract changed")
 
-    case_check = subprocess.run(
+    # The executable and script path are application-owned constants, never user input.
+    case_check = subprocess.run(  # noqa: S603
         [sys.executable, str(ROOT / "scripts" / "verify_case.py")],
         cwd=ROOT,
         text=True,
@@ -72,4 +79,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
