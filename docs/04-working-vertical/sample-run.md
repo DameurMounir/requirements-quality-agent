@@ -12,9 +12,9 @@ frozen 50-item synthetic pack.
 | Draft revision proposals | 4 |
 | Initial status | `NEEDS_REVIEW` |
 
-These numbers demonstrate workflow behavior only. Branch 05 compares the
-baseline findings with the public answer key and calculates precision, recall,
-and category-level misses. No model-accuracy claim is made here.
+These numbers demonstrate workflow behavior only. The evaluation layer compares
+the baseline findings with the public answer key and calculates precision,
+recall, and category-level misses. No model-accuracy claim is made here.
 
 ## Exercised decision paths
 
