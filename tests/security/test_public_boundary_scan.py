@@ -80,6 +80,9 @@ def test_unmanifested_binary_asset_is_rejected(tmp_path: Path) -> None:
 
 def test_deleted_secret_in_reachable_history_is_detected_and_redacted(tmp_path: Path) -> None:
     root = _repository(tmp_path / "repo")
+    current_branch = (  # noqa: SLF001
+        scanner._git(root, "branch", "--show-current").decode("utf-8").strip()
+    )
     _track(root, "README.md", "clean\n")
     scanner._git(root, "commit", "-qm", "clean")  # noqa: SLF001
     token = "sk-" + "A" * 28
@@ -88,9 +91,14 @@ def test_deleted_secret_in_reachable_history_is_detected_and_redacted(tmp_path: 
     (root / "temporary.txt").unlink()
     scanner._git(root, "add", "-u")  # noqa: SLF001
     scanner._git(root, "commit", "-qm", "remove synthetic canary")  # noqa: SLF001
+    scanner._git(root, "checkout", "-qb", "future-only")  # noqa: SLF001
+    _track(root, "future-only.pem", "unreachable branch fixture\n")
+    scanner._git(root, "commit", "-qm", "add unreachable branch fixture")  # noqa: SLF001
+    scanner._git(root, "checkout", "-q", current_branch)  # noqa: SLF001
 
     errors = scanner.scan_history(root)
     joined = "\n".join(errors)
 
     assert "possible OpenAI-style key" in joined
     assert token not in joined
+    assert "future-only.pem" not in joined
