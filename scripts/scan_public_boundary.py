@@ -240,7 +240,7 @@ def scan_current(
 
 
 def _history_blobs(root: Path) -> tuple[tuple[str, Path, bytes], ...]:
-    commits = tuple(item.decode("ascii") for item in _git(root, "rev-list", "--all").splitlines())
+    commits = tuple(item.decode("ascii") for item in _git(root, "rev-list", "HEAD").splitlines())
     blobs: dict[tuple[str, Path], bytes] = {}
     for commit in commits:
         tree = _git(root, "ls-tree", "-r", "-z", "--full-tree", commit)
